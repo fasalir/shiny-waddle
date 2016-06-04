@@ -1,0 +1,168 @@
+  </br>
+  <section id="range" class="container col" ng-controller="DatepickerDemoCtrl">
+    <div class="center">
+        <h2>Report</h2>
+    </div>
+    <div class="col-md-30">
+        <!-- <div class="row">
+            <div class="col-md-1">
+                <label>Dari</label>
+            </div>
+            <div class="col-md-4">
+                <p class="input-group">
+                <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="date.start" ng-click="open1()" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i>
+                    </button>
+                </span>
+                </p>
+            </div>
+        </div> -->
+            <!-- <input type='text' class='form-control' ng-model='search.from'> -->
+        <div class="row">
+            <div class="col-md-1">
+                <label>Dari</label>
+            </div>
+            <div class="col-md-4">
+                <p class="input-group">
+                <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="date.start" ng-click="open1()" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i>
+                    </button>
+                </span>
+                </p>
+            </div>
+            <!-- <label>Sampai</label>
+            <input type='text' class='form-control' ng-model='search.to'> -->
+        </div>
+        <div class="row">
+            <div class="col-md-1">
+                <label>Sampai</label>
+            </div>
+            <div class="col-md-4">
+                <p class="input-group">
+                <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="date.end" ng-click="open2()" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i>
+                    </button>
+                </span>
+                </p>
+            </div>
+            <!-- <label>Sampai</label>
+            <input type='text' class='form-control' ng-model='search.to'> -->
+        </div>
+        <div class="">
+            <button class="btn btn-info" ng-click="cari(date)">Cari</button>
+        </div>
+    </div>
+  </section>
+    </br></br>
+
+<div class="page page-table" data-ng-controller="tableCtrl">
+    <div class="container row-md-6">
+        <button class="btn btn-default" ng-click="print('exportable')">Print Report</button>
+        <button class="btn btn-default" ng-click="exportData()">Export</button>
+    </div>
+    <section class="container table-dynamic">
+        <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span>Booking Report</strong></div>
+
+        <div class="table-filters">
+            <div class="row">
+                <div class="col-sm-4 col-xs-6">
+                    <form>
+                        <input type="text"
+                               placeholder="Search..."
+                               class="form-control"
+                               data-ng-model="searchKeywords"
+                               data-ng-keyup="search()">
+                    </form>
+                </div>
+                <div class="col-sm-3 col-xs-6 filter-result-info">
+                    <span>
+                        Showing {{filteredStores.length}}/{{stores.length}} entries
+                    </span>              
+                </div>
+            </div>
+        </div>
+
+        <div id="exportable">
+            <table class="table table-bordered table-striped table-responsive">
+                <thead>
+                    <tr>
+                        <th><div class="th">
+                            Atas Nama
+                            <span class="fa fa-angle-up"
+                                  data-ng-click=" order('title') "
+                                  data-ng-class="{active: row == 'title'}"></span>
+                            <span class="fa fa-angle-down"
+                                  data-ng-click=" order('-title') "
+                                  data-ng-class="{active: row == '-title'}"></span>
+                        </div></th>
+                        <th><div class="th">
+                            Total Bayar
+                            <span class="fa fa-angle-up"
+                                  data-ng-click=" order('pay') "
+                                  data-ng-class="{active: row == 'pay'}"></span>
+                            <span class="fa fa-angle-down"
+                                  data-ng-click=" order('-pay') "
+                                  data-ng-class="{active: row == '-pay'}"></span>
+                        </div></th>
+                        <th><div class="th">
+                            Status
+                            <span class="fa fa-angle-up"
+                                  data-ng-click=" order('status') "
+                                  data-ng-class="{active: row == 'status'}"></span>
+                            <span class="fa fa-angle-down"
+                                  data-ng-click=" order('-status') "
+                                  data-ng-class="{active: row == '-status'}"></span>
+                        </div></th>
+                        <th><div class="th">
+                            Tanggal Booking
+                            <span class="fa fa-angle-up"
+                                  data-ng-click=" order('bookDate') "
+                                  data-ng-class="{active: row == 'bookDate'}"></span>
+                            <span class="fa fa-angle-down"
+                                  data-ng-click=" order('-bookDate') "
+                                  data-ng-class="{active: row == '-bookDate'}"></span>
+                        </div></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr data-ng-repeat="stores in currentPageStores">
+                        <td>{{stores.title}}</td>
+                        <td>{{stores.pay}}</td>
+                        <td>{{stores.status}}</td>
+                        <td>{{stores.bookDate}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <footer class="table-footer">
+            <div class="row">
+                <div class="col-md-6 page-num-info">
+                    <span>
+                        Show 
+                        <select data-ng-model="numPerPage"
+                                data-ng-options="num for num in numPerPageOpt"
+                                data-ng-change="onNumPerPageChange()">
+                        </select> 
+                        entries per page
+                    </span>
+                </div>
+                <div class="col-md-6 text-right pagination-container">
+                    <pagination class="pagination-sm"
+                                ng-model="currentPage"
+                                total-items="filteredStores.length"
+                                max-size="4"
+                                ng-change="select(currentPage)"
+                                items-per-page="numPerPage"
+                                rotate="false"
+                                previous-text="&lsaquo;" next-text="&rsaquo;"
+                                boundary-links="true"></pagination>
+                </div>
+            </div>
+        </footer>
+    </section>
+
+</div>

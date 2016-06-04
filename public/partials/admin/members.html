@@ -1,0 +1,176 @@
+<section id="member" class="container" ng-controller='memberController'>
+    <div class="center">
+        <h2>Member</h2>
+        <p class="lead">Input Member</p>
+    </div>
+    
+    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal"><i class="icon-user icon-white" ng-click='freeForm()'></i>Add Member</button>
+  </br></br>
+    <table class='table table-bordered'>
+      <thead>
+        <tr>
+          <th>
+            Nama
+          </th>
+          <th>
+            Alamat
+          </th>
+          <!-- <th>
+            Hari Booking
+          </th> -->
+          <th>
+            Telepon
+          </th>
+          <th colspan=3>
+            Action
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat='a in data'>
+          <td>
+            {{a.nama}}
+          </td>
+          <td>
+            {{a.alamat}}
+          </td>
+          <!-- <td>
+            {{a.booking}}
+          </td> -->
+          <td>
+            {{a.telepon}}
+          </td>
+          <td>
+            <button class='btn btn-danger' ng-click='delete(a)'>Delete</button>
+          </td>
+          <td>
+            
+            <button class='btn btn-info' data-toggle="modal" data-target="#myModal" ng-click='open(a)'>Edit</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header row-sm-3">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Member</h4>
+      </div>
+      <div class="modal-body">
+          <div class='row'>
+              <div class='form-group'>
+                <fieldset>
+                  <div class='col-sm-3'>
+                    <label>Nama</label>
+                  </div>
+                  <div class='col-sm-7'>
+                    <input type='text' class='form-control'ng-model='member.nama'>
+                  </div> 
+                </fieldset>
+              </div>
+              <div class='form-group'>
+                <fieldset>
+                  <div class='col-sm-3'>
+                    <label>Alamat</label>
+                   </div>
+                   <div class='col-sm-7'>
+                    <input type='text' class='form-control'ng-model='member.alamat'>
+                  </div> 
+                </fieldset>
+              </div>
+              <div class='form-group'>
+                <fieldset>
+                  <div class='col-sm-3'>
+                    <label>No Telephone</label>
+                   </div>
+                   <div class='col-sm-7'>
+                    <input type='text' class='form-control'ng-model='member.telepon'>
+                  </div> 
+                </fieldset>
+              </div>
+              <div class='form-group'>
+                <fieldset>
+                  <div class='col-sm-3'>
+                      <!-- <button class="addfields" ng-click="addNewChoice()">Add fields</button> -->
+                      <button class='btn btn-success' ng-click='addfield()'>&plus;</button>
+                  </div> 
+                </fieldset>
+              </div>
+              <div class='form-group col-sm-11'>
+                <table class="table-bordered" width="550">
+                  <thead>
+                    <tr>
+                      <th width="1000">
+                        Start Time
+                      </th>
+                      <th width="1000">
+                        End Time
+                      </th>
+                      <th colspan=3 width="80">
+                        Action
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr ng-repeat='item in inputs'>
+                      <td>
+                        <!-- ============================================================================= -->
+                        <div class="dropdown form-group">
+                          <a class="dropdown-toggle" id="dropdown1" role="button" data-toggle="dropdown">
+                            <div class="input-group date">
+                              <input type="text" class="form-control" data-ng-model="item.startTime">
+                              <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                            </div>
+                          </a>
+                          <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                            <datetimepicker data-ng-model="item.startTime" data-datetimepicker-config="{ dropdownSelector: '#dropdown1'}" data-before-render="beforeRenderStartDate($view, $dates, $leftDate, $upDate, $rightDate)"/>
+                          </ul>
+                        </div>
+                        <!-- ============================================================================= -->
+                        <!-- <input ng-model="item.startTime" /> -->
+                      </td>
+                      <td>
+                        <!-- ============================================================================= -->
+                        <div class="dropdown form-group">
+                          <a class="dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown">
+                            <div class="input-group date">
+                              <input type="text" class="form-control" data-ng-model="item.endTime">
+                              <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                            </div>
+                          </a>
+                          <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                            <datetimepicker data-ng-model="item.endTime" data-datetimepicker-config="{ dropdownSelector: '#dropdown2'}" data-before-render="beforeRenderEndDate($view, $dates, $leftDate, $upDate, $rightDate)"/>
+                          </ul>
+                        </div>
+                        <!-- ============================================================================= -->
+                        <!-- <input ng-model="item.endTime" /> -->
+                      </td>
+                      <td>
+                        <button class='btn btn-danger' ng-click="delItem(item)">&times;</button>
+                      </td>
+                    </tr>
+                  </tbody>
+                  </table>
+              </div>
+
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button class='btn btn-success' ng-click='save(member, inputs)'>Save Booking</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+    <br>
+
+    <br>
+    
+
+</section>

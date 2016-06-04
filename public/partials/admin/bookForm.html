@@ -1,0 +1,148 @@
+<section id="booking" class="container" ng-controller='bookingController'>
+    <div class="center">
+        <h2>Booking</h2>
+        <p class="lead">Insert booking list</p>
+    </div>
+    
+    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal"><i class="icon-user icon-white" ng-click="addBook()"></i>Add Booking</button>
+
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Booking</h4>
+        </div>
+        <div class="modal-body">
+
+    <table>
+      <tbody>
+        <tr>
+          <td>
+            Nama
+          </td>
+          <td width="500">
+            <input type='text' class='form-control'ng-model='book.title'>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Mulai
+          </td>
+          <td width="500">
+            <div class="dropdown form-group">
+              <a class="dropdown-toggle" id="dropdown1" role="button" data-toggle="dropdown">
+                <div class="input-group date">
+                  <input type="text" class="form-control" data-ng-model="book.startTime">
+                  <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                </div>
+              </a>
+              <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                <datetimepicker data-ng-model="book.startTime" data-datetimepicker-config="{ dropdownSelector: '#dropdown1'}" data-before-render="beforeRenderStartDate($view, $dates, $leftDate, $upDate, $rightDate)"/>
+              </ul>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Sampai
+          </td>
+          <td width="500">
+            <div class="dropdown form-group">
+              <a class="dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown">
+                <div class="input-group date">
+                  <input type="text" class="form-control" data-ng-model="book.endTime">
+                  <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                </div>
+              </a>
+              <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                <datetimepicker data-ng-model="book.endTime" data-datetimepicker-config="{ dropdownSelector: '#dropdown2'}" data-before-render="beforeRenderEndDate($view, $dates, $leftDate, $upDate, $rightDate)"/>
+              </ul>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Total Bayar
+          </td>
+          <td>
+            <input type='text' class='form-control' ng-model='book.pay'>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <div class="col-sm-3">
+            All day
+            <input type="checkbox" ng-model="book.allDay" ng-true-value="'true'" ng-false-value="'yes'">
+            </div>
+            <div class="col-sm-8">
+            Lapangan
+            <select ng-model="book.field" ng-options="item for item in names"></select>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table> 
+      </div>
+      <div class="modal-footer">
+        <button class='btn btn-success' ng-click='save(book)'>Save Booking</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+    <br>
+
+    <br>
+    <table class='table table-bordered'>
+      <thead>
+        <tr>
+          <th>
+            Nama
+          </th>
+          <th>
+            Mulai
+          </th>
+          <th>
+            Sampai
+          </th>
+          <th>
+            Lapangan
+          </th>
+          <th colspan=3>
+            Action
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat='a in data'>
+          <td>
+            {{a.title}}
+          </td>
+          <td>
+            {{a.startTime}}
+          </td>
+          <td>
+            {{a.endTime}}
+          </td>
+          <td>
+            {{a.field}}
+          </td>
+          <td>
+            <button class='btn btn-danger' ng-click='delete(a)'>Delete</button>
+          </td>
+          <td>
+            
+            <button class='btn btn-info' data-toggle="modal" data-target="#myModal" ng-click='edit(a)'>Edit</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+
+</section>

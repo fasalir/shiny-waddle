@@ -1,0 +1,117 @@
+</br>
+<div class="center">
+    <h2>Messages</h2>
+</div>
+<div class="page page-table" data-ng-controller="messageCtrl" width="50px">
+
+    <section class="container panel panel-default table-dynamic">
+        <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> Bordered table</strong></div>
+
+        <div class="table-filters">
+            <div class="row">
+                <div class="col-sm-4 col-xs-6">
+                    <form>
+                        <input type="text"
+                               placeholder="Search..."
+                               class="form-control"
+                               data-ng-model="searchKeywords"
+                               data-ng-keyup="search()">
+                    </form>
+                </div>
+                <div class="col-sm-3 col-xs-6 filter-result-info">
+                    <span>
+                        Showing {{filteredStores.length}}/{{stores.length}} entries
+                    </span>              
+                </div>
+            </div>
+        </div>
+
+        <table class="table table-bordered table-striped table-responsive">
+            <thead>
+                <tr>
+                    <th><div class="th">
+                        Name
+                        <span class="fa fa-angle-up"
+                              data-ng-click=" order('name') "
+                              data-ng-class="{active: row == 'name'}"></span>
+                        <span class="fa fa-angle-down"
+                              data-ng-click=" order('-name') "
+                              data-ng-class="{active: row == '-name'}"></span>
+                    </div></th>
+                    <th><div class="th">
+                        Email
+                        <span class="fa fa-angle-up"
+                              data-ng-click=" order('email') "
+                              data-ng-class="{active: row == 'email'}"></span>
+                        <span class="fa fa-angle-down"
+                              data-ng-click=" order('-email') "
+                              data-ng-class="{active: row == '-email'}"></span>
+                    </div></th>
+                    <th><div class="th">
+                        Phone
+                        <span class="fa fa-angle-up"
+                              data-ng-click=" order('phone') "
+                              data-ng-class="{active: row == 'phone'}"></span>
+                        <span class="fa fa-angle-down"
+                              data-ng-click=" order('-phone') "
+                              data-ng-class="{active: row == '-phone'}"></span>
+                    </div></th>
+                    <th><div class="th">
+                        Subject
+                        <span class="fa fa-angle-up"
+                              data-ng-click=" order('subject') "
+                              data-ng-class="{active: row == 'subject'}"></span>
+                        <span class="fa fa-angle-down"
+                              data-ng-click=" order('-subject') "
+                              data-ng-class="{active: row == '-subject'}"></span>
+                    </div></th>
+                    <th><div class="th">
+                        Message
+                        <span class="fa fa-angle-up"
+                              data-ng-click=" order('message') "
+                              data-ng-class="{active: row == 'message'}"></span>
+                        <span class="fa fa-angle-down"
+                              data-ng-click=" order('-message') "
+                              data-ng-class="{active: row == '-message'}"></span>
+                    </div></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr data-ng-repeat="store in currentPageStores">
+                    <td>{{store.name}}</td>
+                    <td>{{store.email}}</td>
+                    <td>{{store.phone}}</td>
+                    <td>{{store.subject}}</td>
+                    <td>{{store.message}}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <footer class="table-footer">
+            <div class="row">
+                <div class="col-md-6 page-num-info">
+                    <span>
+                        Show 
+                        <select data-ng-model="numPerPage"
+                                data-ng-options="num for num in numPerPageOpt"
+                                data-ng-change="onNumPerPageChange()">
+                        </select> 
+                        entries per page
+                    </span>
+                </div>
+                <div class="col-md-6 text-right pagination-container">
+                    <pagination class="pagination-sm"
+                                ng-model="currentPage"
+                                total-items="filteredStores.length"
+                                max-size="4"
+                                ng-change="select(currentPage)"
+                                items-per-page="numPerPage"
+                                rotate="false"
+                                previous-text="&lsaquo;" next-text="&rsaquo;"
+                                boundary-links="true"></pagination>
+                </div>
+            </div>
+        </footer>
+    </section>
+
+</div>
